@@ -29,7 +29,6 @@ public class CrptApi {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add("Authorization", "Bearer " + token);
-        System.out.println("Заголовок создан");
 
         Map<String, Object> jsonDate = new HashMap<>();
         jsonDate.put("document_format", "MANUAL");
@@ -37,10 +36,8 @@ public class CrptApi {
         jsonDate.put("product_group", "Товарная группа");
         jsonDate.put("signature", "<Открепленная подпись в base64>");
         jsonDate.put("type", "LP_INTRODUCE_GOODS");
-        System.out.println("Тело создано");
 
         HttpEntity<Map<String, Object>> request = new HttpEntity<>(jsonDate, headers);
-        System.out.println("Объект создан");
 
         semaphore.acquire();
         try {
@@ -49,7 +46,6 @@ public class CrptApi {
         } finally {
             semaphore.release();
         }
-        System.out.println("Завершили метод");
     }
 
     public static void main(String[] args) {
@@ -57,7 +53,6 @@ public class CrptApi {
         CrptApi crptApi = new CrptApi(3, 5000);
 
         for (int i = 0; i < 10; i++) {
-            System.out.println(i);
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
