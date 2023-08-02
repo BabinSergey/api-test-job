@@ -23,9 +23,7 @@ public class CrptApi {
         semaphore.acquire();
         try {
             RestTemplate restTemplate = new RestTemplate();
-            String url = "http://postman-echo.com/get/";
-//            String url = "https://ismp.crpt.ru/api/v3/lk/documents/create";
-//            String url = "https://markirovka.demo.crpt.tech/";
+            String url = "https://ismp.crpt.ru/api/v3/lk/documents/create";
             String token = "token"; // поле для полученного токена
 
             HttpHeaders headers = new HttpHeaders();
@@ -52,7 +50,7 @@ public class CrptApi {
     public static void main(String[] args) {
 
         CrptApi crptApi = new CrptApi(3, 1000);
-        
+
         for(int i = 0; i < 7; i++) {
             Thread thread = new Thread(new Runnable() {
                 @Override
