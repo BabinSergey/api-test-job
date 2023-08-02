@@ -1,6 +1,7 @@
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -41,7 +42,8 @@ public class CrptApi {
 
         semaphore.acquire();
         try {
-            restTemplate.postForEntity(url, request, String.class);
+            ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+            System.out.println(response.getStatusCode());
             Thread.sleep(timeUnit);
         } finally {
             semaphore.release();
